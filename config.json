@@ -1,0 +1,16 @@
+{
+    "port": 10061,
+    "uploadPath": "./uploads",
+    "database": "./users.db",
+    "sessionSecret": "tringle-secret-key-change-this",
+    "maxFileSize": 2147483648,
+    "maxVideosPerUser": 25,
+    "allowedFileTypes": [
+        "video/mp4",
+        "video/webm",
+        "video/ogg"
+    ],
+    "embedDomain": "http://thor.pylex.software:10061",
+    "logoPath": "/tringle-player/logo.png",
+    "smallLogoPath": "/tringle-player/logo.png"
+}

@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Video Player Pro</title>
+    <title><%= video.title %> - Tringle Player</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/tringle-player/main.css">
 </head>
-<body>
+<body style="margin: 0; padding: 0;">
     <div class="video-container" id="videoContainer">
-        <div class="top-controls">
-            <div class="video-title">Video Title</div>
-        </div>
-
-        <video id="video" preload="metadata">
-            <source src="your-video.mp4" type="video/mp4">
-            <track kind="captions" src="caption.vtt" srclang="en" label="English">
+        <video id="video" preload="metadata" poster="/tringle-player/thumbnail.jpg">
+            <source src="/video/<%= video.filename %>" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         
         <div class="play-overlay" id="playOverlay">
-        <button class="btn" id="playButton">
-            <i class="fas fa-play"></i>
-        </button>
-    </div>
+            <button class="btn" id="playButton">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
 
         <div class="loading" id="loading">
             <div class="loading-spinner"></div>
@@ -33,7 +28,7 @@
             An error occurred while playing the video
         </div>
 
-        <div class="quality-badge" id="qualityBadge">HD</div>
+        <img src="<%= config.smallLogoPath %>" alt="Logo" class="quality-badge" style="width: 32px; height: 32px;">
 
         <div class="video-controls">
             <div class="progress-area" id="progressArea">
@@ -71,20 +66,17 @@
                 </div>
 
                 <div class="controls-right">
-                    <button class="btn" id="captionsBtn" title="Captions">
-                        <i class="fas fa-closed-captioning"></i>
-                    </button>
                     <button class="btn" id="pipBtn" title="Picture in Picture">
                         <i class="fas fa-external-link-alt"></i>
                     </button>
+                    <a href="/video/<%= video.filename %>" download class="btn" id="downloadBtn" title="Download Video">
+                        <i class="fas fa-download"></i>
+                    </a>
                     <button class="btn" id="settingsBtn" title="Settings">
                         <i class="fas fa-cog"></i>
                     </button>
                     <button class="btn" id="fullscreenBtn" title="Fullscreen (f)">
                         <i class="fas fa-expand"></i>
-                    </button>
-                    <button class="btn" id="downloadBtn" title="Download Video">
-                        <i class="fas fa-download"></i>
                     </button>
                 </div>
             </div>
@@ -149,6 +141,6 @@
             <div class="context-item" id="contextCopy"><i class="fas fa-copy"></i> Copy video URL</div>
         </div>
     </div>
-    <script src="main.js"></script>
+    <script src="/tringle-player/main.js"></script>
 </body>
 </html>

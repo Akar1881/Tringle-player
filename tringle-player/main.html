@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Video Player Pro</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="video-container" id="videoContainer">
+
+        <video id="video" preload="metadata">
+            <source src="your-video.mp4" type="video/mp4">
+            <track kind="captions" src="caption.vtt" srclang="en" label="English">
+            Your browser does not support the video tag.
+        </video>
+        
+        <div class="play-overlay" id="playOverlay">
+        <button class="btn" id="playButton">
+            <i class="fas fa-play"></i>
+        </button>
+    </div>
+
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+        </div>
+
+        <div class="error-message" id="errorMessage">
+            An error occurred while playing the video
+        </div>
+
+        <div class="quality-badge" id="qualityBadge">HD</div>
+
+        <div class="video-controls">
+            <div class="progress-area" id="progressArea">
+                <div class="preview-box" id="previewBox">
+                    <div class="thumbnail"></div>
+                    <div class="time-stamp">0:00</div>
+                </div>
+                <div class="buffered-bar" id="bufferedBar"></div>
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <div class="controls-list">
+                <div class="controls-left">
+                    <button class="btn" id="playPauseBtn" title="Play (k)">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="btn" id="rewindBtn" title="Rewind 10s">
+                        <i class="fas fa-backward"></i>
+                    </button>
+                    <button class="btn" id="forwardBtn" title="Forward 10s">
+                        <i class="fas fa-forward"></i>
+                    </button>
+                    <div class="volume-container">
+                        <button class="btn" id="muteBtn" title="Mute (m)">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <div class="volume-slider" id="volumeSlider">
+                            <input type="range" min="0" max="1" step="0.1" value="1">
+                        </div>
+                    </div>
+                    <div class="time-display">
+                        <span id="currentTime">0:00</span> / 
+                        <span id="duration">0:00</span>
+                    </div>
+                </div>
+
+                <div class="controls-right">
+                    <button class="btn" id="captionsBtn" title="Captions">
+                        <i class="fas fa-closed-captioning"></i>
+                    </button>
+                    <button class="btn" id="pipBtn" title="Picture in Picture">
+                        <i class="fas fa-external-link-alt"></i>
+                    </button>
+                    <button class="btn" id="downloadBtn" title="Download Video">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="btn" id="settingsBtn" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <button class="btn" id="fullscreenBtn" title="Fullscreen (f)">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-menu" id="settingsMenu">
+            <div class="settings-panel active" id="mainPanel">
+                <div class="settings-item" data-panel="speed">
+                    <span><i class="fas fa-tachometer-alt"></i> Playback Speed</span>
+                    <span class="value" id="speedValue">Normal</span>
+                </div>
+                <div class="settings-item" data-panel="quality">
+                    <span><i class="fas fa-video"></i> Quality</span>
+                    <span class="value" id="qualityValue">Auto</span>
+                </div>
+                <div class="settings-item" data-panel="loop">
+                    <span><i class="fas fa-redo"></i> Loop</span>
+                    <span class="value" id="loopValue">Off</span>
+                </div>
+            </div>
+
+            <div class="settings-panel" id="speedPanel">
+                <div class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                    Playback Speed
+                </div>
+                <div class="option-item" data-speed="0.25">0.25x <i class="fas fa-check"></i></div>
+                <div class="option-item" data-speed="0.5">0.5x <i class="fas fa-check"></i></div>
+                <div class="option-item" data-speed="0.75">0.75x <i class="fas fa-check"></i></div>
+                <div class="option-item active" data-speed="1">Normal <i class="fas fa-check"></i></div>
+                <div class="option-item" data-speed="1.25">1.25x <i class="fas fa-check"></i></div>
+                <div class="option-item" data-speed="1.5">1.5x <i class="fas fa-check"></i></div>
+                <div class="option-item" data-speed="2">2x <i class="fas fa-check"></i></div>
+            </div>
+
+            <div class="settings-panel" id="qualityPanel">
+                <div class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                    Quality
+                </div>
+                <div class="option-item active" data-quality="auto">Auto <i class="fas fa-check"></i></div>
+                <div class="option-item" data-quality="1080p">1080p <i class="fas fa-check"></i></div>
+                <div class="option-item" data-quality="720p">720p <i class="fas fa-check"></i></div>
+                <div class="option-item" data-quality="480p">480p <i class="fas fa-check"></i></div>
+                <div class="option-item" data-quality="360p">360p <i class="fas fa-check"></i></div>
+            </div>
+
+            <div class="settings-panel" id="loopPanel">
+                <div class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                    Loop Video
+                </div>
+                <div class="option-item active" data-loop="off">Off <i class="fas fa-check"></i></div>
+                <div class="option-item" data-loop="on">On <i class="fas fa-check"></i></div>
+            </div>
+        </div>
+
+        <div class="context-menu" id="contextMenu">
+            <div class="context-item" id="contextPlay"><i class="fas fa-play"></i> Play</div>
+            <div class="context-item" id="contextMute"><i class="fas fa-volume-up"></i> Mute</div>
+            <div class="context-item" id="contextLoop"><i class="fas fa-redo"></i> Loop</div>
+            <div class="context-item" id="contextCopy"><i class="fas fa-copy"></i> Copy video URL</div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

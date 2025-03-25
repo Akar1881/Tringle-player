@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" class="<%= locals.theme === 'dark' ? 'dark' : '' %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tringle Player</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .dark {
+            background-color: #111827;
+            color: #f3f4f6;
+        }
+        .dark .bg-white {
+            background-color: #1f2937;
+        }
+        .dark .text-gray-600 {
+            color: #d1d5db;
+        }
+        .dark .text-gray-500 {
+            color: #9ca3af;
+        }
+        .dark .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900">
+    <nav class="bg-white shadow-lg dark:bg-gray-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div>
+                        <a href="/" class="flex items-center py-4">
+                            <img src="<%= config.smallLogoPath %>" alt="Logo" class="h-8 w-8 mr-2">
+                            <span class="font-semibold text-gray-500 text-lg dark:text-gray-300">Tringle Player</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <% if (user) { %>
+                        <a href="/dashboard" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600">Dashboard</a>
+                        <a href="/logout" class="py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600">Logout</a>
+                    <% } else { %>
+                        <a href="/login" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600">Login</a>
+                        <a href="/register" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600">Register</a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center">
+            <img src="<%= config.logoPath %>" alt="Tringle Player Logo" class="mx-auto mb-6 h-24">
+            <h1 class="text-4xl font-bold mb-4 dark:text-gray-100">Welcome to Tringle Player</h1>
+            <p class="text-xl text-gray-600 mb-8 dark:text-gray-300">Free video hosting and embedding solution</p>
+            
+            <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md mb-8 dark:bg-gray-800 dark:shadow-xl">
+                <h2 class="text-2xl font-bold mb-4 dark:text-gray-100">How It Works</h2>
+                <div class="space-y-4 text-left">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">1</div>
+                        <div class="ml-4">
+                            <h3 class="font-semibold dark:text-gray-100">Create an Account</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Sign up for free - no credit card required</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">2</div>
+                        <div class="ml-4">
+                            <h3 class="font-semibold dark:text-gray-100">Upload Your Videos</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Upload up to <%= config.maxVideosPerUser %> videos (max <%= (config.maxFileSize / (1024 * 1024 * 1024)).toFixed(1) %>GB each)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">3</div>
+                        <div class="ml-4">
+                            <h3 class="font-semibold dark:text-gray-100">Share & Embed</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Get embed codes to share your videos anywhere</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% if (!user) { %>
+                <div class="space-x-4">
+                    <a href="/login" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors">Get Started</a>
+                    <a href="/register" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors">Create Account</a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
