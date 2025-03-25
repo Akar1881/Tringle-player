@@ -1,0 +1,445 @@
+
+
+:root {
+    --primary-color: #3498db;
+    --hover-color: #2980b9;
+    --bg-color: #0a0a0a;
+    --control-bg: rgba(28, 28, 28, 0.9);
+    --text-color: #fff;
+    --menu-bg: rgba(28, 28, 28, 0.95);
+    --hover-bg: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--bg-color);
+    font-family: 'Arial', sans-serif;
+    color: var(--text-color);
+    overflow: hidden;
+}
+
+.video-container {
+    position: relative;
+    width: 900px;
+    max-width: 100%;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.top-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
+    transition: all 0.3s ease;
+    opacity: 0;
+    z-index: 2;
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, var(--control-bg) 0%, transparent 100%);
+    padding: 10px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    z-index: 2;
+}
+
+.video-container.controls-visible .video-controls,
+.video-container.controls-visible .top-controls {
+    opacity: 1;
+}
+
+.progress-area {
+    position: relative;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: height 0.15s ease;
+}
+
+.progress-area:hover {
+    height: 8px;
+}
+
+.progress-area .preview-box {
+    position: absolute;
+    bottom: 25px;
+    transform: translateX(-50%);
+    background: var(--menu-bg);
+    padding: 5px;
+    border-radius: 5px;
+    display: none;
+}
+
+.progress-box .thumbnail {
+    width: 160px;
+    height: 90px;
+    background: #000;
+}
+
+.progress-box .time-stamp {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: var(--primary-color);
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.buffered-bar {
+    position: absolute;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.controls-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.controls-left, .controls-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    opacity: 0.85;
+}
+
+.btn:hover {
+    opacity: 1;
+    background: var(--hover-bg);
+}
+
+.btn.active {
+    color: var(--primary-color);
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+.volume-slider {
+    width: 0;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: width 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+.volume-container:hover .volume-slider,
+.volume-slider.active {
+    width: 80px;
+    transform: scaleX(1);
+}
+
+.volume-slider input {
+    width: 100%;
+    height: 4px;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.volume-slider input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.time-display {
+    font-size: 14px;
+    min-width: 100px;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.settings-menu {
+    position: absolute;
+    bottom: 60px;
+    right: 10px;
+    background: var(--menu-bg);
+    border-radius: 8px;
+    padding: 0;
+    display: none;
+    min-width: 200px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    z-index: 3;
+}
+
+.settings-panel {
+    display: none;
+}
+
+.settings-panel.active {
+    display: block;
+}
+
+.settings-item {
+    padding: 12px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.settings-item:last-child {
+    border-bottom: none;
+}
+
+.settings-item:hover {
+    background: var(--hover-bg);
+}
+
+.settings-item .value {
+    color: var(--primary-color);
+    font-size: 0.9em;
+}
+
+.back-button {
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background: var(--hover-bg);
+}
+
+.option-item {
+    padding: 12px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.option-item:hover {
+    background: var(--hover-bg);
+}
+
+.option-item.active {
+    color: var(--primary-color);
+}
+
+.option-item i {
+    display: none;
+}
+
+.option-item.active i {
+    display: block;
+}
+
+.video-title {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.quality-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 2;
+}
+
+/* Context Menu */
+.context-menu {
+    position: absolute;
+    background: var(--menu-bg);
+    border-radius: 8px;
+    padding: 5px 0;
+    min-width: 150px;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.context-item {
+    padding: 8px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.context-item:hover {
+    background: var(--hover-bg);
+}
+
+/* Loading Animation */
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 2;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* Error Message */
+.error-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px 25px;
+    border-radius: 8px;
+    display: none;
+    text-align: center;
+    z-index: 3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .video-container {
+        border-radius: 0;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .video-controls {
+        padding: 5px;
+    }
+    
+    .btn {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+
+    .settings-menu {
+        right: 0;
+        bottom: 50px;
+        min-width: 180px;
+    }
+
+    .volume-container {
+        display: none;
+    }
+
+    .time-display {
+        font-size: 12px;
+        min-width: 80px;
+    }
+
+    .preview-box {
+        display: none !important;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+    .btn:hover {
+        background: none;
+    }
+
+    .settings-item:hover,
+    .option-item:hover {
+        background: none;
+    }
+}
+
+.play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* Set to transparent */
+    z-index: 3; /* Ensure it’s on top */
+}
+
+.play-overlay button {
+    background: none; /* No background for the button */
+    border: none; /* No border */
+    color: var(--primary-color); /* Color for the icon */
+    font-size: 48px; /* Size of the play icon */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
