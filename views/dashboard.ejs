@@ -7,162 +7,279 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            transition: background-color 0.3s ease;
+        }
+
         .dark {
-            background-color: #111827;
+            background-color: #0f172a;
             color: #f3f4f6;
         }
-        .dark .bg-white {
-            background-color: #1f2937;
+
+        .neumorphic-light {
+            background: #ffffff;
+            box-shadow: 20px 20px 60px #d9d9d9,
+                       -20px -20px 60px #ffffff;
+            border-radius: 20px;
         }
+
+        .neumorphic-dark {
+            background: #1e293b;
+            box-shadow: 20px 20px 60px #1a2333,
+                       -20px -20px 60px #222f43;
+            border-radius: 20px;
+        }
+
+        .dark .bg-white {
+            background-color: #1e293b;
+        }
+
         .dark .text-gray-700 {
             color: #f3f4f6;
         }
+
         .dark .border {
             border-color: #374151;
         }
+
+        /* Enhanced Input Styles */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            transition: all 0.3s ease;
+            border-radius: 10px;
+        }
+
         .dark input[type="text"],
         .dark input[type="email"],
         .dark input[type="password"] {
-            background-color: #374151;
+            background-color: #2d3748;
             color: #f3f4f6;
-            border-color: #4b5563;
+            border-color: #4a5568;
         }
-        .dark input[type="file"]::file-selector-button {
-            background-color: #3b82f6;
+
+        /* Enhanced File Input */
+        input[type="file"] {
+            padding: 12px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="file"]::file-selector-button {
+            background: linear-gradient(145deg, #3b82f6, #2563eb);
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
+            padding: 10px 20px;
+            border-radius: 10px;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
-        .dark input[type="file"]::file-selector-button:hover {
-            background-color: #2563eb;
-        }
+
+        /* Progress Bar Enhancement */
         .progress-container {
             width: 100%;
             background-color: #f0f0f0;
-            border-radius: 0.5rem;
+            border-radius: 10px;
             overflow: hidden;
+            margin: 20px 0;
         }
+
         .dark .progress-container {
-            background-color: #374151;
+            background-color: #2d3748;
         }
+
         .progress-bar {
             width: 0%;
-            height: 20px;
-            background-color: #3b82f6;
+            height: 24px;
+            background: linear-gradient(145deg, #3b82f6, #2563eb);
             text-align: center;
-            line-height: 20px;
+            line-height: 24px;
             color: white;
             transition: width 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .delete-modal, .copy-modal, .view-modal {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            width: 90%;
-            max-width: 800px;
-            animation: slideUp 0.3s ease;
-        }
-        .dark .delete-modal, .dark .copy-modal, .dark .view-modal {
-            background-color: #1f2937;
-            border: 1px solid #374151;
-        }
-        @keyframes slideUp {
-            from {
-                transform: translate(-50%, 100%);
-                opacity: 0;
-            }
-            to {
-                transform: translate(-50%, 0);
-                opacity: 1;
-            }
-        }
-        .modal-overlay {
-            display: none;
-            position: fixed;
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            animation: fadeIn 0.3s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        input[type="file"] {
-            padding: 8px;
-            border-radius: 4px;
-            border: 1px solid #e2e8f0;
+            left: -100%;
             width: 100%;
-            cursor: pointer;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 2s infinite;
         }
-        .dark input[type="file"] {
-            border-color: #4b5563;
-            color: #f3f4f6;
+
+        @keyframes shimmer {
+            100% {
+                left: 100%;
+            }
         }
-        input[type="file"]::file-selector-button {
-            background-color: #3b82f6;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            margin-right: 16px;
-            cursor: pointer;
-            transition: background-color 0.2s;
+
+        /* Enhanced Card Styles */
+        .video-card {
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
         }
-        input[type="file"]::file-selector-button:hover {
-            background-color: #2563eb;
+
+        .video-card:hover {
+            transform: translateY(-5px);
         }
-        .dark .text-gray-500 {
-            color: #9ca3af;
-        }
-        .dark .text-gray-600 {
-            color: #d1d5db;
-        }
-        .copy-notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #4CAF50;
-            color: white;
+
+        /* Button Styles */
+        .btn {
             padding: 10px 20px;
-            border-radius: 4px;
-            display: none;
-            animation: fadeInUp 0.3s ease;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        @keyframes fadeInUp {
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .btn:hover::after {
+            width: 200%;
+            height: 200%;
+        }
+
+        /* Modal Enhancements */
+        .modal {
+            backdrop-filter: blur(8px);
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .dark .modal {
+            background: rgba(30,41,59,0.9);
+        }
+
+        /* Navigation Enhancement */
+        nav {
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.8);
+            transition: all 0.3s ease;
+        }
+
+        .dark nav {
+            background: rgba(30,41,59,0.8);
+        }
+
+        /* Logo Animation */
+        .logo-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.1) 50%,
+                rgba(255,255,255,0) 100%
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        .dark ::-webkit-scrollbar-track {
+            background: #2d3748;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Notification Enhancement */
+        .notification {
+            background: linear-gradient(145deg, #4CAF50, #45a049);
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: slideUpFade 0.3s ease;
+        }
+
+        @keyframes slideUpFade {
             from {
+                transform: translateY(20px);
                 opacity: 0;
-                transform: translate(-50%, 20px);
             }
             to {
+                transform: translateY(0);
                 opacity: 1;
-                transform: translate(-50%, 0);
             }
         }
+
+        /* Video Preview Enhancement */
         .video-preview {
-            width: 100%;
-            max-width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-            border-radius: 8px;
-            margin-bottom: 1rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .video-preview:hover {
+            transform: scale(1.02);
         }
     </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900">
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
     <nav class="bg-white shadow-lg mb-8 dark:bg-gray-800">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between">
